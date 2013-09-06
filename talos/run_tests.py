@@ -192,6 +192,13 @@ def run_tests(configurator):
   # set browser_config
   browser_config=configurator.browser_config()
 
+  # if immersive-mode: set up metro browser launch
+  if config.get('immersive_mode_path'):
+      # TODO assert win 8
+      appPath = '-firefoxpath %s' % (browser_config['browser_path'],)
+      browser_config['extra_args'] += appPath
+      browser_config['browser_path'] = config.get('immersive_mode_path')
+
   #set defaults
   title = config.get('title', '')
   testdate = config.get('testdate', '')

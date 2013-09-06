@@ -36,6 +36,8 @@ class PerfConfigurator(Configuration):
         ('browser_path', {'help': "path to executable we are testing",
                           'flags': ['-e', '--executablePath']
                           }),
+        ('immersive_mode_path', {'help': "launches tests in immersive browser",
+                                 'flags': ['--metro-immersive-path']}),
         ('title', {'help': 'Title of the test run',
                    'default': 'qm-pxp01',
                    'flags': ['-t', '--title']}),
