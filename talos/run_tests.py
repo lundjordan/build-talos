@@ -196,7 +196,7 @@ def run_tests(configurator):
   if config.get('immersive_mode_path'):
       # TODO assert win 8
       appPath = '-firefoxpath %s' % (browser_config['browser_path'],)
-      browser_config['extra_args'] += appPath
+      browser_config['extra_args'] += appPath + '.exe'
       browser_config['browser_path'] = config.get('immersive_mode_path')
 
   #set defaults
