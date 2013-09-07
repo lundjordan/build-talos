@@ -195,8 +195,9 @@ def run_tests(configurator):
   # if immersive-mode: set up metro browser launch
   if config.get('immersive_mode_path'):
       # TODO assert win 8
-      appPath = '-firefoxpath %s' % (browser_config['browser_path'],)
-      browser_config['extra_args'] += appPath + '.exe'
+      # mozharness cuts off the exe but metrotestharness needs it?
+      appPath = '-firefoxpath %s.exe' % (browser_config['browser_path'],)
+      browser_config['extra_args'] += appPath
       browser_config['browser_path'] = config.get('immersive_mode_path')
 
   #set defaults
