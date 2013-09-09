@@ -104,7 +104,9 @@ function plInit() {
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
-    // dumpLine("isImmersive: " + isImmersive());
+    dumpLine("isImmersive: " + isImmersive());
+    dumpLine("toplevelwin: " + toplevelwin);
+    dumpLine("toplevelwin wrappedJSObject: " + toplevelwin.arguments[0].wrappedJSObject);
     // if (true && toplevelwin.arguments[0].wrappedJSObject) {
     if (isImmersive() && toplevelwin.arguments[0].wrappedJSObject) {
       args = toplevelwin.arguments[0].wrappedJSObject;
