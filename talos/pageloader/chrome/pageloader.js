@@ -105,7 +105,8 @@ function plInit() {
     // every other case they are on window.
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
     dumpLine("isImmersive: " + isImmersive());
-    if (isImmersive() && toplevelwin.arguments[0].wrappedJSObject) {
+    // if (isImmersive() && toplevelwin.arguments[0].wrappedJSObject) {
+    if (true && toplevelwin.arguments[0].wrappedJSObject) {
       args = toplevelwin.arguments[0].wrappedJSObject;
       if (!args.useBrowserChrome) {
         // Huh? Should never happen.
