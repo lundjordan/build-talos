@@ -60,10 +60,12 @@ var gIOS = null;
 
 // metro immersive environment helper
 function isImmersive() {
+  dumpLine("@m.o/win-metro: " + Cc["@mozilla.org/windows-metroutils;1"]);
   if (!Cc["@mozilla.org/windows-metroutils;1"])
     return false;
   let metroUtils = Cc["@mozilla.org/windows-metroutils;1"]
                              .createInstance(Ci.nsIWinMetroUtils);
+  dumpLine("metroUtils: " + metroUtils);
   if (!metroUtils)
     return false;
   return metroUtils.immersive;
@@ -102,6 +104,7 @@ function plInit() {
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
+    dumpLine("isImmersive: " + isImmersive());
     if (isImmersive() && toplevelwin.arguments[0].wrappedJSObject) {
       args = toplevelwin.arguments[0].wrappedJSObject;
       if (!args.useBrowserChrome) {
