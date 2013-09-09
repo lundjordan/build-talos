@@ -145,7 +145,7 @@ the highest value.
                                   'resolution': 1,
                                   'rss': False,
                                   'shutdown': False,
-                                  'timeout': 3600,
+                                  'timeout': 5400,
                                   'tpchrome': True,
                                   'tpcycles': 10,
                                   'tpmozafterpaint': False,
@@ -185,14 +185,14 @@ the highest value.
 
     # remote-specific defaults
     remote_defaults = {'basetest': {
-            'timeout': 3600,
+            'timeout': 5400,
             'profile_path': '${talos}/mobile_profile',
             'remote_counters': [],
             'tpcycles': 3,
             'tpdelay': 1000
             },
                        'browser_wait': 20,
-                       'test_timeout': 3600,
+                       'test_timeout': 5400,
                        'env': {'MOZ_CRASHREPORTER_NO_REPORT': '1',
                                'MOZ_CRASHREPORTER_SHUTDOWN': '1'},
                        'dirs': {},
