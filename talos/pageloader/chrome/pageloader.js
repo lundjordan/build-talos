@@ -109,9 +109,9 @@ function plInit() {
     for(var key in toplevelwin.arguments) {
         toplevelwin_args_props += '| Key: ' + key + ' Value: ' + toplevelwin.arguments[key] + ' |'
     }
-    for(var key in toplevelwin.arguments[0]) {
-        toplevelwin_args_0 += '| Key: ' + key + ' Value: ' + toplevelwin.arguments[0][key] + ' |'
-    }
+    // for(var key in toplevelwin.arguments[0]) {
+    //     toplevelwin_args_0 += '| Key: ' + key + ' Value: ' + toplevelwin.arguments[0][key] + ' |'
+    // }
     dumpLine("isImmersive: " + isImmersive());
     dumpLine("toplevelwin: " + toplevelwin.arguments[0]);
     dumpLine("toplevelwin wrappedJSObject: " + toplevelwin.arguments[0].wrappedJSObject);
