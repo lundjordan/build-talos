@@ -114,11 +114,18 @@ PageLoaderCmdLineHandler.prototype =
       return;
     }
 
+    dump("made it here: line 117");
+    dump("\n");
+
     let chromeURL = "chrome://pageloader/content/pageloader.xul";
 
     // In metro we load pageloader into a tab when running with chrome since we
     // don't have multiple desktop windows to play with.
+    dump('args.useBrowserChrome' + args.useBrowserChrome);
+    dump('isimmers: ' + isImmersive);
     if (args.useBrowserChrome && isImmersive()) {
+        dump("args.useBrowserChrome and is isImmersive() is true");
+        dump("\n");
       args.pageloadURL = chromeURL;
       chromeURL = "chrome://browser/content/browser.xul";
     }
