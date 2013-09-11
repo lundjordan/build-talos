@@ -119,8 +119,8 @@ PageLoaderCmdLineHandler.prototype =
 
     // In metro we load pageloader into a tab when running with chrome since we
     // don't have multiple desktop windows to play with.
-    dump('args.useBrowserChrome: ' + args.useBrowserChrome);
-    dump('isImmersive(): ' + isImmersive());
+    // dump('args.useBrowserChrome: ' + args.useBrowserChrome);
+    // dump('isImmersive(): ' + isImmersive());
     if (args.useBrowserChrome && isImmersive()) {
         dump("args.useBrowserChrome and is isImmersive() are true");
         dump("\n");
@@ -129,13 +129,17 @@ PageLoaderCmdLineHandler.prototype =
     }
 
     args.wrappedJSObject = args;
-    Services.ww.openWindow(null, chromeURL, "_blank",
-                            "chrome,dialog=no,all", args);
+    setTimeout(function(){
+        Services.ww.openWindow(null, chromeURL, "_blank",
+                               "chrome,dialog=no,all", args);
+    }, 5000);
+    // Services.ww.openWindow(null, chromeURL, "_blank",
+    //                         "chrome,dialog=no,all", args);
 
     // Don't pass command line to the default app processor
     cmdLine.preventDefault = true;
 
-    dump("made it here: line 138");
+    dump("made it to line after: cmdLine.preventDefault = true;");
     dump("\n");
   },
 

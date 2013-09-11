@@ -60,12 +60,12 @@ var gIOS = null;
 
 // metro immersive environment helper
 function isImmersive() {
-  dumpLine("@m.o/win-metro: " + Cc["@mozilla.org/windows-metroutils;1"]);
+  // dumpLine("JLUND @m.o/win-metro: " + Cc["@mozilla.org/windows-metroutils;1"]);
   if (!Cc["@mozilla.org/windows-metroutils;1"])
     return false;
   let metroUtils = Cc["@mozilla.org/windows-metroutils;1"]
                              .createInstance(Ci.nsIWinMetroUtils);
-  dumpLine("metroUtils: " + metroUtils);
+  // dumpLine("JLUND metroUtils: " + metroUtils);
   if (!metroUtils)
     return false;
   return metroUtils.immersive;
@@ -104,20 +104,20 @@ function plInit() {
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
-    toplevelwin_args_props = ''
-    toplevelwin_args_0 = ''
-    for(var key in toplevelwin) {
-        //toplevelwin_args_props += '| Key: ' + key + ' Value: ' + toplevelwin[key] + ' |'
-        toplevelwin_args_props += '| Key: ' + key + ' |'
-    }
+    // toplevelwin_args_props = ''
+    // toplevelwin_args_0 = ''
+    // for(var key in toplevelwin) {
+    //     //toplevelwin_args_props += '| Key: ' + key + ' Value: ' + toplevelwin[key] + ' |'
+    //     toplevelwin_args_props += '| Key: ' + key + ' |'
+    // }
     // for(var key in toplevelwin.arguments[0]) {
     //     toplevelwin_args_0 += '| Key: ' + key + ' Value: ' + toplevelwin.arguments[0][key] + ' |'
     // }
-    dumpLine("isImmersive: " + isImmersive());
-    dumpLine("toplevelwin: " + toplevelwin.arguments[0]);
-    dumpLine("toplevelwin wrappedJSObject: " + toplevelwin.arguments[0].wrappedJSObject);
-    dumpLine("toplevelwin props: " + toplevelwin_args_props);
-    /* dumpLine("toplevelwin args 0 props: " + toplevelwin_args_0); */
+    dumpLine("JLUND isImmersive(): " + isImmersive());
+    dumpLine("JLUND toplevelwin: " + toplevelwin.arguments[0]);
+    dumpLine("JLUND toplevelwin wrappedJSObject: " + toplevelwin.arguments[0].wrappedJSObject);
+    // dumpLine("toplevelwin props: " + toplevelwin_args_props);
+    // dumpLine("toplevelwin args 0 props: " + toplevelwin_args_0);
 
     if (isImmersive() && toplevelwin.arguments[0].wrappedJSObject) {
       args = toplevelwin.arguments[0].wrappedJSObject;
