@@ -103,7 +103,10 @@ function plInit() {
 
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
-    let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
+    setTimeout(function(){
+        let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
+    }, 5000);
+    // let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
     // toplevelwin_args_props = ''
     // toplevelwin_args_0 = ''
     // for(var key in toplevelwin) {

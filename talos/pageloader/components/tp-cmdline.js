@@ -129,12 +129,8 @@ PageLoaderCmdLineHandler.prototype =
     }
 
     args.wrappedJSObject = args;
-    setTimeout(function(){
-        Services.ww.openWindow(null, chromeURL, "_blank",
-                               "chrome,dialog=no,all", args);
-    }, 5000);
-    // Services.ww.openWindow(null, chromeURL, "_blank",
-    //                         "chrome,dialog=no,all", args);
+    Services.ww.openWindow(null, chromeURL, "_blank",
+                            "chrome,dialog=no,all", args);
 
     // Don't pass command line to the default app processor
     cmdLine.preventDefault = true;
