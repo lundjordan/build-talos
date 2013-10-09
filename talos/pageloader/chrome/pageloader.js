@@ -103,10 +103,10 @@ function plInit() {
 
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
-    setTimeout(function(){
-        dumpLine("JLUND waiting 5 seconds...")
-    }, 5000);
-    dumpLine("JLUND done waiting 5 seconds...")
+    // setTimeout(function(){
+    //     dumpLine("JLUND waiting 5 seconds...")
+    // }, 5000);
+    // dumpLine("JLUND done waiting 5 seconds...")
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
     // toplevelwin_args_props = ''
     // toplevelwin_args_0 = ''
