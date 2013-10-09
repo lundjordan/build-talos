@@ -397,7 +397,7 @@ class TTest(object):
                             counter_results[count_type].append(val)
                     line = process.stdout.readline()
                     if line:
-                        print line
+                        utils.info(line)
                     if process.poll() != None: #browser_controller completed, file now full
                         break
 
