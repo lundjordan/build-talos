@@ -291,7 +291,7 @@ function plInit() {
     plStop(true);
   }
 
-  }, 2500);
+  }, 5000);
   dumpLine("JLUND done waiting 5 seconds...")
 }
 
