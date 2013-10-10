@@ -83,6 +83,8 @@ function plInit() {
   // Tracks if we are running in a background tab in the metro browser
   let metroTabbedChromeRun = false;
 
+  dumpLine("JLUND waiting 5 seconds...")
+  setTimeout(function(){
   try {
     var args;
     
@@ -103,9 +105,6 @@ function plInit() {
 
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
-    dumpLine("JLUND waiting 10 seconds...")
-    setTimeout(function(){ }, 10000);
-    dumpLine("JLUND done waiting 10 seconds...")
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
     // toplevelwin_args_props = ''
     // toplevelwin_args_0 = ''
@@ -118,7 +117,6 @@ function plInit() {
     // }
     dumpLine("JLUND isImmersive(): " + isImmersive());
     dumpLine("JLUND toplevelwin: " + toplevelwin.arguments[0]);
-    dumpLine("JLUND toplevelwin wrappedJSObject: " + toplevelwin.arguments[0].wrappedJSObject);
     // dumpLine("toplevelwin props: " + toplevelwin_args_props);
     // dumpLine("toplevelwin args 0 props: " + toplevelwin_args_0);
 
@@ -292,6 +290,9 @@ function plInit() {
     dumpLine("pageloader exception: " + e);
     plStop(true);
   }
+
+  }, 2500);
+  dumpLine("JLUND done waiting 5 seconds...")
 }
 
 function plPageFlags() {
@@ -691,6 +692,7 @@ function plStopAll(force) {
       if (useMozAfterPaint)
         content.messageManager.removeMessageListener('PageLoader:MozAfterPaint', plPaintHandler);
 
+      content.messageManager.loadFrameScript("data:,removeEventListener('load', _contentLoadHandler, true);", false);
       content.messageManager.loadFrameScript("data:,removeEventListener('load', _contentLoadHandler, true);", false);
     }
   }
