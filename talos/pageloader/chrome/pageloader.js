@@ -102,7 +102,6 @@ function plInit() {
     // In metro chrome runs, the browser window has our cmdline arguments. In
     // every other case they are on window.
     let toplevelwin = Services.wm.getMostRecentWindow("navigator:browser");
-
     if (isImmersive() && toplevelwin.arguments[0].wrappedJSObject) {
       args = toplevelwin.arguments[0].wrappedJSObject;
       if (!args.useBrowserChrome) {
@@ -273,7 +272,6 @@ function plInit() {
     dumpLine("pageloader exception: " + e);
     plStop(true);
   }
-
 }
 
 function plPageFlags() {
