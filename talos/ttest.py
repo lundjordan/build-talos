@@ -363,13 +363,13 @@ class TTest(object):
 
                 b_cmd = self._ffprocess.GenerateBControllerCommandLine(command_line, browser_config, test_config)
                 try:
-                    process = subprocess.Popen(b_cmd, universal_newlines=True, bufsize=0, env=os.environ)
-                    # process = subprocess.Popen(b_cmd,
-                    #                            universal_newlines=True,
-                    #                            bufsize=0,
-                    #                            env=os.environ,
-                    #                            stdout=subprocess.PIPE,
-                    #                            stderr=subprocess.STDOUT)
+                    # process = subprocess.Popen(b_cmd, universal_newlines=True, bufsize=0, env=os.environ)
+                    process = subprocess.Popen(b_cmd,
+                                               universal_newlines=True,
+                                               bufsize=0,
+                                               env=os.environ,
+                                               stdout=subprocess.PIPE,
+                                               stderr=subprocess.STDOUT)
                 except:
                     raise talosError("error executing browser command line '%s': %s" % (subprocess.list2cmdline(b_cmd), sys.exc_info()[0]))
 
@@ -405,9 +405,9 @@ class TTest(object):
                         val = cm.getCounterValue(count_type)
                         if val:
                             counter_results[count_type].append(val)
-                    # line = process.stdout.readline()
-                    # if line:
-                    #     utils.info(line)
+                    line = process.stdout.readline()
+                    if line:
+                        utils.info(line)
                     if process.poll() != None: #browser_controller completed, file now full
                         break
 
