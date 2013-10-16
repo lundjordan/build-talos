@@ -81,7 +81,6 @@ function plInit() {
   // Tracks if we are running in a background tab in the metro browser
   let metroTabbedChromeRun = false;
 
-  setTimeout(function(){
   try {
     var args;
     
@@ -275,7 +274,6 @@ function plInit() {
     plStop(true);
   }
 
-  }, 5000);
 }
 
 function plPageFlags() {
