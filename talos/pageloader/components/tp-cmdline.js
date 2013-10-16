@@ -114,16 +114,11 @@ PageLoaderCmdLineHandler.prototype =
       return;
     }
 
-
     let chromeURL = "chrome://pageloader/content/pageloader.xul";
 
     // In metro we load pageloader into a tab when running with chrome since we
     // don't have multiple desktop windows to play with.
-    // dump('args.useBrowserChrome: ' + args.useBrowserChrome);
-    // dump('isImmersive(): ' + isImmersive());
     if (args.useBrowserChrome && isImmersive()) {
-        dump("args.useBrowserChrome and is isImmersive() are true");
-        dump("\n");
       args.pageloadURL = chromeURL;
       chromeURL = "chrome://browser/content/browser.xul";
     }
@@ -134,9 +129,6 @@ PageLoaderCmdLineHandler.prototype =
 
     // Don't pass command line to the default app processor
     cmdLine.preventDefault = true;
-
-    dump("made it to line after: cmdLine.preventDefault = true;");
-    dump("\n");
   },
 
   helpInfo :
