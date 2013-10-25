@@ -58,7 +58,7 @@ class Test(object):
 class TsBase(Test):
     """abstract base class for ts-style tests"""
     keys = ['url', 'url_timestamp', 'timeout', 'cycles', 'shutdown', 'profile_path', 'xperf_counters',
-            'xperf_providers', 'xperf_user_providers', 'xperf_stackwalk', 'tpmozafterpaint']
+            'xperf_providers', 'xperf_user_providers', 'xperf_stackwalk', 'tpmozafterpaint', 'setup', 'cleanup']
 
 class ts(TsBase):
     """
@@ -136,7 +136,7 @@ class trobopan(TsBase):
     Panning performance test. Value is square of frame delays (ms greater
     than 25 ms) encountered while panning. Lower values are better.
     """
-    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.fennec.tests.testPan org.mozilla.roboexample.test/org.mozilla.fennec.FennecInstrumentationTestRunner'
+    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.gecko.tests.testPan org.mozilla.roboexample.test/org.mozilla.gecko.FennecInstrumentationTestRunner'
     cycles = 5
     timeout = 300
     desktop = False
@@ -146,7 +146,7 @@ class tcheckerboard(TsBase):
     """
     Simple measure of 'checkerboarding'. Lower values are better.
     """
-    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.fennec.tests.testCheck org.mozilla.roboexample.test/org.mozilla.fennec.FennecInstrumentationTestRunner'
+    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.gecko.tests.testCheck org.mozilla.roboexample.test/org.mozilla.gecko.FennecInstrumentationTestRunner'
     cycles = 5
     timeout = 300
     desktop = False
@@ -156,7 +156,7 @@ class tprovider(TsBase):
     """
     A mobile ts_type test (docstring to be updated)
     """
-    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.fennec.tests.testBrowserProviderPerf org.mozilla.roboexample.test/org.mozilla.fennec.FennecInstrumentationTestRunner'
+    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.gecko.tests.testBrowserProviderPerf org.mozilla.roboexample.test/org.mozilla.gecko.FennecInstrumentationTestRunner'
     cycles = 5
     timeout = 300
     desktop = False
@@ -167,7 +167,7 @@ class tcheck2(TsBase):
     Measure of 'checkerboarding' during simulation of real user interaction
     with page. Lower values are better.
     """
-    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.fennec.tests.testCheck2 org.mozilla.roboexample.test/org.mozilla.fennec.FennecInstrumentationTestRunner'
+    url = 'am instrument -w -e deviceroot %s -e class org.mozilla.gecko.tests.testCheck2 org.mozilla.roboexample.test/org.mozilla.gecko.FennecInstrumentationTestRunner'
     cycles = 5
     timeout = 300
     desktop = False
@@ -192,7 +192,8 @@ class PageloaderTest(Test):
             'rss', 'resolution', 'cycles',
             'win_counters', 'w7_counters', 'linux_counters', 'mac_counters', 'remote_counters', 'xperf_counters',
             'timeout', 'shutdown', 'responsiveness', 'profile_path',
-            'xperf_providers', 'xperf_user_providers', 'xperf_stackwalk', 'filters', 'preferences', 'extensions'
+            'xperf_providers', 'xperf_user_providers', 'xperf_stackwalk', 'filters', 'preferences', 'extensions',
+            'setup', 'cleanup'
             ]
 
 class tart(PageloaderTest):
@@ -254,7 +255,7 @@ class tp4m(tp):
     tpcycles = 2
     win_counters = w7_counters = linux_counters = mac_counters = None
     remote_counters = ['Main_RSS']
-    timeout = 14400
+    timeout = 1800
 
 class tp5n(tp):
     """
@@ -277,7 +278,7 @@ class tp5n(tp):
     xperf_counters = ['main_startup_fileio', 'main_startup_netio', 'main_normal_fileio', 'main_normal_netio', 'nonmain_startup_fileio', 'nonmain_normal_fileio', 'nonmain_normal_netio', 'mainthread_readcount', 'mainthread_readbytes', 'mainthread_writecount', 'mainthread_writebytes']
     mobile = False # too many files to run, we will hit OOM
     filters = [["ignore_first", [5]], ['median', []]]
-    timeout = 3600
+    timeout = 1800
 
 class tp5o(tp5n):
     """

@@ -158,6 +158,8 @@ the highest value.
                                   'linux_counters': [],
                                   'mac_counters': [],
                                   'xperf_counters': [],
+                                  'setup': None,
+                                  'cleanup': None
                                   },
                       'flags': []}),
         ('test_overrides', {'help': 'test overrides from .config file',
@@ -707,8 +709,6 @@ the highest value.
             # Take care of tpan/tzoom tests
             url = url.replace('webServer=', 'webServer=%s' % self.config['webserver'])
 
-            # Take care of the robocop based tests
-            url = url.replace('org.mozilla.fennec', self.config['browser_path'])
         return url
 
     def buildRemoteManifest(self, manifestName):
