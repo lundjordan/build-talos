@@ -153,11 +153,11 @@ class TTest(object):
                     logcat = f.read().split('\r')
                 found = mozcrash.check_for_java_exception(logcat)
 
+            remoteminidumpdir = profile_dir + '/minidumps/'
             if not found:
                 # check for minidumps
                 minidumpdir = tempfile.mkdtemp()
                 try:
-                    remoteminidumpdir = profile_dir + '/minidumps/'
                     if self._ffprocess.testAgent.dirExists(remoteminidumpdir):
                         self._ffprocess.testAgent.getDirectory(remoteminidumpdir, minidumpdir)
                 except mozdevice.DMError:
@@ -167,10 +167,10 @@ class TTest(object):
                                                    browser_config['symbols_path'],
                                                    stackwalk_binary=stackwalkbin,
                                                    test_name=test_name)
+                self._hostproc.removeDirectory(minidumpdir)
 
             # cleanup dumps on remote
             self._ffprocess.testAgent.removeDir(remoteminidumpdir)
-            self._hostproc.removeDirectory(minidumpdir)
         else:
             # check for minidumps
             minidumpdir = os.path.join(profile_dir, 'minidumps')
@@ -234,7 +234,7 @@ class TTest(object):
             if temp_dir:
                 self.cleanupProfile(temp_dir)
         except talosError, te:
-            utils.debug("cleanup error: %s", te.msg)
+            utils.debug("cleanup error: %s", te)
         except Exception:
             utils.debug("unknown error during cleanup: %s" % (traceback.format_exc(),))
 
@@ -366,14 +366,11 @@ class TTest(object):
                     if test_config['setup']:
                         # Generate bcontroller.yml for xperf
                         utils.GenerateTalosConfig(command_args, browser_config, test_config)
-                        setup = talosProcess.talosProcess(['python'] + test_config['setup'].split())
+                        setup = talosProcess.talosProcess(['python'] + test_config['setup'].split(), env=os.environ.copy())
                         setup.run()
                         setup.wait()
 
                     self.isFinished = False
-                    # set the current time
-                    if 'url_timestamp' in test_config and test_config['url_timestamp']:
-                        command_args[-1] += str(int(time.time()) * 1000)
                     browser = talosProcess.talosProcess(command_args, env=os.environ.copy(), logfile=browser_config['browser_log'])
                     browser.run(timeout=timeout)
                     self.pid = browser.pid
@@ -393,16 +390,13 @@ class TTest(object):
                     if test_config['cleanup']:
                         #HACK: add the pid to support xperf where we require the pid in post processing
                         utils.GenerateTalosConfig(command_args, browser_config, test_config, pid=self.pid)
-                        cleanup = talosProcess.talosProcess(['python'] + test_config['cleanup'].split())
+                        cleanup = talosProcess.talosProcess(['python'] + test_config['cleanup'].split(), env=os.environ.copy())
                         cleanup.run()
                         cleanup.wait()
 
                     # allow mozprocess to terminate fully.  It appears our log file is partial unless we wait
                     time.sleep(5)
                 else:
-                    # set the current time
-                    if 'url_timestamp' in test_config and test_config['url_timestamp']:
-                        command_args[-1] += self._ffprocess.getCurrentTime()
                     self._ffprocess.runProgram(browser_config, command_args, timeout=timeout)
 
                 # ensure the browser log exists
