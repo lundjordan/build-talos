@@ -208,9 +208,6 @@ def run_tests(configurator):
   if 'metrotestharness' in browser_config['browser_path'] and not title.endswith(".m"):
     # we are running this with win 8 metro
     title = "%s.m" % (title,)
-    # Bug 956384 - Enable addons for talos runs when running metro browser
-    browser_config['preferences']['extensions.defaultProviders.enabled'] = True
-
 
   # get the process name from the path to the browser
   if not browser_config['process']:
