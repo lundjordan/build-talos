@@ -421,6 +421,7 @@ class DatazillaOutput(Output):
         results_url_split = utils.urlsplit(results_url)
         results_scheme, results_server, results_path, _, _ = results_url_split
 
+        utils.info("TALOSDATA: %s" % json.dumps(results.datasets()))
         if results_scheme in ('http', 'https'):
             self.post(results, results_server, results_path, results_scheme, tbpl_output)
         elif results_scheme == 'file':
@@ -547,6 +548,10 @@ class DatazillaOutput(Output):
             params['product'] = results.build_name
             params['repository'] = results.branch
             params['os'] = results.os.lower()
+            # As per bug 957166, we need to Capitalize Android
+            if params['os'] == 'android':
+                params['os'] = 'Android'
+
             params['os_version'] = results.os_version
             params['project'] = project
             query = '?%s' % '&'.join(['%s=%s' % (key, urllib.quote(str(value))) for key, value in params.items()])
