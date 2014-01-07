@@ -237,7 +237,7 @@ the highest value.
         'browser.shell.checkDefaultBrowser': False,
         'browser.warnOnQuit': False,
         'browser.display.overlaynavbuttons': False, # metrofx specific
-        # Bug 956384 - Enable addons for talos runs when running metro browser
+        # Bug 956384 - Enable addons for metro browser
         'extensions.defaultProviders.enabled': True,  # metrofx specific
         'dom.allow_scripts_to_close_windows': True,
         'dom.disable_open_during_load': False,
