@@ -63,7 +63,8 @@ class FFProcess(object):
         # We must inform talos about the sub process, the metro browser itself,
         # that is spawned from metrotestharness. The metro browser proc is
         # given the same name as the non metro equivalent: 'firefox.exe'
-        if process_name == "metrotestharness":
+        if (process_name == "metrotestharness" and
+                "firefox" not in self.extra_prog):
             self.extra_prog.append("firefox")
 
         processes_to_kill = filter(lambda n: n, ([process_name, child_process] +
